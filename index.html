@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050713" />
+    <meta
+      name="description"
+      content="Rushan 的个人宇宙：心灵成长、飞盘与医疗器械研发三大主题星系。"
+    />
+    <title>Rushan 的个人宇宙</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050713'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23fff3c4'/%3E%3Cellipse cx='32' cy='32' rx='23' ry='10' fill='none' stroke='%237bdff2' stroke-width='3' transform='rotate(-18 32 32)'/%3E%3Ccircle cx='53' cy='25' r='3' fill='%23f49ac2'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button class="brand" id="homeButton" type="button" aria-label="返回个人宇宙总览">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>RUSHAN · PERSONAL UNIVERSE</span>
+      </button>
+      <div class="topbar-actions">
+        <span class="version">DEMO · v0.1.0</span>
+        <button class="sound-toggle" id="motionToggle" type="button" aria-pressed="false">
+          动效：开
+        </button>
+      </div>
+    </header>
+
+    <main id="app" tabindex="-1">
+      <section class="universe-view" id="universeView" aria-labelledby="universeTitle">
+        <div class="intro-block">
+          <p class="eyebrow">我的三个世界</p>
+          <h1 id="universeTitle">在不同轨道上，<br /><span>寻找同一种连接。</span></h1>
+          <p class="intro-copy">
+            我通过共同做事理解人和问题：在成长中陪伴，在运动中相遇，在研发中推动结果。
+          </p>
+          <p class="explore-hint"><span aria-hidden="true">↘</span> 选择一座星系，开始探索</p>
+        </div>
+
+        <div class="galaxy-field" id="galaxyField" aria-label="三大主题星系"></div>
+
+        <div class="universe-index" aria-label="星系索引">
+          <span>01 心灵成长</span>
+          <span>02 飞盘</span>
+          <span>03 医疗器械研发</span>
+        </div>
+      </section>
+
+      <section class="galaxy-view" id="galaxyView" hidden aria-live="polite">
+        <div class="galaxy-heading">
+          <button class="back-button" id="backButton" type="button">
+            <span aria-hidden="true">←</span> 返回个人宇宙
+          </button>
+          <div>
+            <p class="eyebrow" id="galaxyNumber"></p>
+            <h2 id="galaxyTitle"></h2>
+            <p id="galaxyDescription"></p>
+          </div>
+        </div>
+
+        <div class="system-layout">
+          <div class="system-map" id="systemMap" aria-label="星系内容地图"></div>
+          <aside class="legend-panel">
+            <p class="legend-title">星体图例</p>
+            <div><span class="legend-star"></span><b>恒星</b><small>长期核心</small></div>
+            <div><span class="legend-planet"></span><b>行星</b><small>具体经历</small></div>
+            <div><span class="legend-meteor"></span><b>流星</b><small>启发片段</small></div>
+            <p class="legend-note">点击星体，查看它承载的故事。</p>
+          </aside>
+        </div>
+
+        <div class="mobile-node-list" id="mobileNodeList" aria-label="内容列表"></div>
+      </section>
+    </main>
+
+    <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+    <aside class="detail-drawer" id="detailDrawer" aria-labelledby="detailTitle" aria-hidden="true">
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="关闭详情">×</button>
+      <div class="drawer-scroll">
+        <div class="detail-type" id="detailType"></div>
+        <h2 id="detailTitle"></h2>
+        <p class="detail-summary" id="detailSummary"></p>
+        <div class="detail-body" id="detailBody"></div>
+        <div class="detail-media" id="detailMedia" hidden></div>
+        <div class="detail-links" id="detailLinks" hidden></div>
+      </div>
+    </aside>
+
+    <noscript>请启用 JavaScript 以探索这张个人星系地图。</noscript>
+    <script src="./content.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
+
