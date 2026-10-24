@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b20">
+  <meta name="description" content="在原始山河插画中点击雪山或河流，进入可编辑的图文页面。">
+  <title>山河之间｜图片分层 Demo</title>
+  <link rel="preconnect" href="https://upload.wikimedia.org">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#/" aria-label="回到一级页面">
+      <span class="brand-mark" aria-hidden="true">山</span>
+      <span><strong>山河之间</strong><small>图片分层测试</small></span>
+    </a>
+    <nav class="main-nav" aria-label="主要页面">
+      <a href="#/">一级插画</a>
+      <a href="#/mountain">雪山</a>
+      <a href="#/river">雪山与河流交会</a>
+    </nav>
+    <div class="header-actions">
+      <button class="quiet-button" id="edit-toggle" type="button" aria-pressed="false">编辑内容</button>
+      <button class="icon-button" id="export-button" type="button" title="导出编辑内容" aria-label="导出编辑内容">⇩</button>
+      <label class="icon-button import-button" title="导入编辑内容" aria-label="导入编辑内容">⇧<input id="import-file" type="file" accept="application/json,.json" hidden></label>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <aside class="edit-notice" id="edit-notice" hidden>
+    当前是编辑模式。文字和图片修改会保存在这台设备的浏览器里；导出 JSON 后可留存，确认内容后再用于更新公开网页。
+  </aside>
+
+  <footer class="site-footer">
+    <span>图片分层 Demo · 可从一级插画进入两个二级页面</span>
+    <span>雪山 ⇄ 雪山与河流交会</span>
+  </footer>
+</body>
+</html>
