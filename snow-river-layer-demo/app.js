@@ -1,9 +1,9 @@
 (function(){
   const STORAGE_KEY='snow-river-layer-demo-content-v1';
   const photos={
-    lake:{src:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Frozen_expanse_of_Lake_Louise.jpg/1280px-Frozen_expanse_of_Lake_Louise.jpg',alt:'路易斯湖与雪山',credit:'Rschroeder1985 · Wikimedia Commons · CC0',url:'https://commons.wikimedia.org/wiki/File:Frozen_expanse_of_Lake_Louise.jpg'},
-    river:{src:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/River_in_winter_landscape.jpg/1280px-River_in_winter_landscape.jpg',alt:'冬季山谷里的河流',credit:'Dreamy Pixel · Wikimedia Commons · CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:River_in_winter_landscape.jpg'},
-    stream:{src:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/SnowyForest%26Stream.jpg/960px-SnowyForest%26Stream.jpg',alt:'九寨沟雪林与溪流',credit:'Gear$Head · Wikimedia Commons · CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:SnowyForest%26Stream.jpg'}
+    lake:{src:'assets/frozen-lake-louise.jpg',alt:'路易斯湖与雪山',credit:'Rschroeder1985 · Wikimedia Commons · CC0',url:'https://commons.wikimedia.org/wiki/File:Frozen_expanse_of_Lake_Louise.jpg'},
+    river:{src:'assets/river-winter.jpg',alt:'冬季山谷里的河流',credit:'Dreamy Pixel · Wikimedia Commons · CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:River_in_winter_landscape.jpg'},
+    stream:{src:'assets/snowy-forest-stream.jpg',alt:'九寨沟雪林与溪流',credit:'Gear$Head · Wikimedia Commons · CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:SnowyForest%26Stream.jpg'}
   };
   const defaults={
     mountain:{title:'雪山',intro:'沿着一级插画中的雪峰进入这里。图片下方可以放一段自己的文字，也可以继续添加图文段落。',blocks:[{image:photos.lake.src,alt:photos.lake.alt,heading:'雪山与湖面',text:'待填写：在这里写一段和这张图片有关的文字。可以记录你看到的细节、想到的事情，或者这张图为什么放在这个页面。',credit:photos.lake.credit,source:photos.lake.url}]},
@@ -38,3 +38,4 @@
   importFile.addEventListener('change',()=>{const file=importFile.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const incoming=JSON.parse(reader.result);if(!incoming.mountain||!incoming.river)throw new Error();data=incoming;saveData();render();toast('内容已导入')}catch(e){toast('文件格式不对，请选择导出的页面内容 JSON')}importFile.value=''};reader.readAsText(file)});
   window.addEventListener('hashchange',()=>{window.scrollTo(0,0);render()});render();
 })();
+
