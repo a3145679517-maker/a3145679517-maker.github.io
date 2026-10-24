@@ -17,7 +17,8 @@
   const exportButton=document.getElementById('export-button');
   const importFile=document.getElementById('import-file');
   function clone(value){return JSON.parse(JSON.stringify(value))}
-  function loadData(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));if(saved&&saved.mountain&&saved.river)return saved}catch(e){}return clone(defaults)}
+  function migrateData(value){const copy=clone(value);const legacy=[['river_in_winter_landscape','assets/river-winter.jpg'],['snowyforest','assets/snowy-forest-stream.jpg'],['frozen_expanse_of_lake_louise','assets/frozen-lake-louise.jpg']];for(const page of ['mountain','river'])for(const block of copy[page].blocks||[]){const src=String(block.image||'').toLowerCase().replaceAll('%26','&');for(const [key,path] of legacy)if(src.includes(key)){block.image=path;break}}return copy}
+  function loadData(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));if(saved&&saved.mountain&&saved.river)return migrateData(saved)}catch(e){}return clone(defaults)}
   function saveData(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}catch(e){toast('浏览器存储空间不足，请先导出内容')}}
   function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
   function route(){return location.hash.replace(/^#\/?/,'')||'home'}
@@ -35,7 +36,7 @@
   function toast(message){let el=document.querySelector('.toast');if(!el){el=document.createElement('div');el.className='toast';document.body.appendChild(el)}el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),2500)}
   editButton.addEventListener('click',()=>{editing=!editing;render();if(!editing)toast('已保存到当前浏览器')});
   exportButton.addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='山河之间-页面内容.json';a.click();URL.revokeObjectURL(a.href);toast('内容 JSON 已导出')});
-  importFile.addEventListener('change',()=>{const file=importFile.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const incoming=JSON.parse(reader.result);if(!incoming.mountain||!incoming.river)throw new Error();data=incoming;saveData();render();toast('内容已导入')}catch(e){toast('文件格式不对，请选择导出的页面内容 JSON')}importFile.value=''};reader.readAsText(file)});
+  importFile.addEventListener('change',()=>{const file=importFile.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const incoming=JSON.parse(reader.result);if(!incoming.mountain||!incoming.river)throw new Error();data=migrateData(incoming);saveData();render();toast('内容已导入')}catch(e){toast('文件格式不对，请选择导出的页面内容 JSON')}importFile.value=''};reader.readAsText(file)});
   window.addEventListener('hashchange',()=>{window.scrollTo(0,0);render()});render();
 })();
 
